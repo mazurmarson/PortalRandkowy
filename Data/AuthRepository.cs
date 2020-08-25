@@ -21,13 +21,13 @@ namespace PortalRandkowy.API.Data
 
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username)
-            
-            if(user == null)
-            return null;
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
 
-            if(!VerifyPasswordhash(password, user.PasswordHash, user.PasswordSalt))
-            return null;
+            if(user == null)
+                return null;
+
+            if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
 
             return user;
 
@@ -71,7 +71,7 @@ namespace PortalRandkowy.API.Data
             
         }
 
-        private bool VerifyPasswordhash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
