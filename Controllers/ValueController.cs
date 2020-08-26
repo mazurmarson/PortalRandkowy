@@ -7,9 +7,11 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PortalRandkowy.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
@@ -28,7 +30,7 @@ namespace PortalRandkowy.API.Controllers
             var values = await _context.Values.ToListAsync();
              return Ok(values);
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
