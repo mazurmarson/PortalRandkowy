@@ -25,5 +25,18 @@ export class NavComponent implements OnInit {
       console.log('Wystpił błąd logowania');
     });
   }
+  
+  // tslint:disable-next-line: typedef
+  loggedIn()
+  {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
 
+  // tslint:disable-next-line: typedef
+  logout()
+  {
+    localStorage.removeItem('token');
+    console.log('Zostałeś wylogowany');
+  }
 }
