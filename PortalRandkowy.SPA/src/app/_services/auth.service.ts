@@ -8,21 +8,21 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  baseUrl = 'http://localhost:5000/api/auth/';
+  baseUrl = 'http://localhost:5000/api/auth/'; // To jest adres serwera i kontrolera jakiego chcemy uzyc
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { } // Konsturktor pobiera adres klienta
 
 // tslint:disable-next-line: typedef
-login(model: any)
+login(model: any) // Model przyjmuje dane jakiekolwiek
 {
-  return this.http.post(this.baseUrl + 'login', model)
-  .pipe(map((respone: any)=>{
-    const user = respone;
-    if(user)
+  return this.http.post(this.baseUrl + 'login', model)  // Zwraca adres baseUrl + login uzytkownika + metoda Post
+  .pipe(map((respone: any) => {
+    const user = respone; // user rowna sie odpowiedz
+    if (user) // Jeśli zwraca użytkownika wtedy udostepnia mu tokena
     {
-      localStorage.setItem('token', user.token);
+      localStorage.setItem('token', user.token); // Przyznanie tokena
     }
-  }))
+  }) );
 }
 
 }

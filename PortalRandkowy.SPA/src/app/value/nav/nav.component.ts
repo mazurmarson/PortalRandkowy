@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,7 @@ export class NavComponent implements OnInit {
 
   model: any = {};
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
@@ -18,7 +19,11 @@ export class NavComponent implements OnInit {
   // tslint:disable-next-line: typedef
   login()
   {
-    console.log(this.model);
+    this.authService.login(this.model).subscribe(next => {
+      console.log('Zalogowałeś się do aplikacji');
+    }, error => {
+      console.log('Wystpił błąd logowania');
+    });
   }
 
 }
