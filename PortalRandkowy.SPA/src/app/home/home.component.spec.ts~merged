@@ -1,0 +1,54 @@
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
+<<<<<<< HEAD
+<<<<<<< HEAD:PortalRandkowy.SPA/src/app/home/home.component.spec.ts
+=======
+>>>>>>> 935db36178a0e3989224e99f7c684f4558d0ee76
+import { HomeComponent } from './home.component';
+
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ HomeComponent ]
+<<<<<<< HEAD
+=======
+import { RegisterComponent } from './register.component';
+
+describe('RegisterComponent', () => {
+  let component: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ RegisterComponent ]
+>>>>>>> 935db36178a0e3989224e99f7c684f4558d0ee76:PortalRandkowy.SPA/src/app/register/register.component.spec.ts
+=======
+>>>>>>> 935db36178a0e3989224e99f7c684f4558d0ee76
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+<<<<<<< HEAD
+<<<<<<< HEAD:PortalRandkowy.SPA/src/app/home/home.component.spec.ts
+    fixture = TestBed.createComponent(HomeComponent);
+=======
+    fixture = TestBed.createComponent(RegisterComponent);
+>>>>>>> 935db36178a0e3989224e99f7c684f4558d0ee76:PortalRandkowy.SPA/src/app/register/register.component.spec.ts
+=======
+    fixture = TestBed.createComponent(HomeComponent);
+>>>>>>> 935db36178a0e3989224e99f7c684f4558d0ee76
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
