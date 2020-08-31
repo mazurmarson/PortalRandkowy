@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
@@ -16,14 +16,12 @@ export class RegisterComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  register()
-  {
+  register() {
     console.log(this.model);
   }
 
   // tslint:disable-next-line: typedef
-  cancel()
-  {
+  cancel() {
     console.log('Anulowane');
   }
 
