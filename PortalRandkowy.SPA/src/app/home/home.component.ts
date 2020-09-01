@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
 
   registerMode = false;
-  values: any;
+
 
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
-    this.getValues();
+
   }
 
   // tslint:disable-next-line: typedef
@@ -23,14 +23,8 @@ export class HomeComponent implements OnInit {
     this.registerMode = true;
   }
 
-  // tslint:disable-next-line: typedef
-  getValues() {
-    this.http.get('http://localhost:5000/api/values').subscribe(response => {
-      this.values = response;
-    }, error => {
-      console.log(error);
-    });
-  }
+
+
   // tslint:disable-next-line: typedef
   cancelRegisterMode(registerMode: boolean)
   {
