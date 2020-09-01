@@ -10,6 +10,7 @@ export class AuthService {
 
   baseUrl = 'http://localhost:5000/api/auth/'; // To jest adres serwera i kontrolera jakiego chcemy uzyc
   jwtHelper = new JwtHelperService();
+  decodedToken: any;
 
   constructor(private http: HttpClient) { } // Konsturktor pobiera adres klienta
 
@@ -22,6 +23,8 @@ login(model: any) // Model przyjmuje dane jakiekolwiek
     if (user) // Jeśli zwraca użytkownika wtedy udostepnia mu tokena
     {
       localStorage.setItem('token', user.token); // Przyznanie tokena
+      this.decodedToken = this.jwtHelper.decodeToken(user.token);
+      console.log(this.decodedToken);
     }
   }) );
 }
