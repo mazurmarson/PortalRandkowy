@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
+declare let alertify: any;
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -7,7 +10,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  constructor(private authService: AuthService) { }
+  // tslint:disable-next-line: no-shadowed-variable
+  constructor(private authService: AuthService, private alertify: AlertifyService) { }
   // tslint:disable-next-line: typedef
   ngOnInit() {
   }
@@ -15,9 +19,9 @@ export class NavComponent implements OnInit {
   login()
   {
     this.authService.login(this.model).subscribe(next => {
-      console.log('Zalogowałeś się do aplikacji');
+      this.alertify.success('Zalogowałeś się do aplikacji');
     }, error => {
-      console.log('Wystpił błąd logowania');
+      this.alertify.error('Wystpił błąd logowania');
     });
   }
 
@@ -32,6 +36,6 @@ export class NavComponent implements OnInit {
   logout()
   {
     localStorage.removeItem('token');
-    console.log('Zostałeś wylogowany');
+    this.alertify.message('Zostałeś wylogowany');
   }
 }
