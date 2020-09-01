@@ -28,8 +28,7 @@ export class NavComponent implements OnInit {
   // tslint:disable-next-line: typedef
   loggedIn()
   {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.loggedIn();
   }
 
   // tslint:disable-next-line: typedef
