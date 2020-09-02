@@ -76,11 +76,11 @@ namespace PortalRandkowy.API.Dtos
 
         public string ItFeelsBestIn { get; set; }
 
-        public string FriendsWouldDescribeMe { get;  set; }
+       // public string FriendsWouldDescribeMe { get;  set; }
 
         //Zakladka zdjecia
 
-        public ICollection<Photo> Photos { get; set; } 
+        public ICollection<PhotosForDetailedDto> Photos { get; set; } 
 
         public string PhotoUrl { get; set; }
     }

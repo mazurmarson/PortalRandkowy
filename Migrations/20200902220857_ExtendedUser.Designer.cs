@@ -9,7 +9,7 @@ using PortalRandkowy.API.Data;
 namespace PortalRandkowy.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200901173523_ExtendedUser")]
+    [Migration("20200902220857_ExtendedUser")]
     partial class ExtendedUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace PortalRandkowy.API.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -64,7 +64,7 @@ namespace PortalRandkowy.API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateOfBirt")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -169,9 +169,11 @@ namespace PortalRandkowy.API.Migrations
 
             modelBuilder.Entity("PortalRandkowy.API.Models.Photo", b =>
                 {
-                    b.HasOne("PortalRandkowy.API.Models.User", null)
+                    b.HasOne("PortalRandkowy.API.Models.User", "User")
                         .WithMany("Photos")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

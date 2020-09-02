@@ -29,7 +29,7 @@ namespace PortalRandkowy.API.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "DateOfBirt",
+                name: "DateOfBirth",
                 table: "Users",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
@@ -206,7 +206,7 @@ namespace PortalRandkowy.API.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "DateOfBirt",
+                name: "DateOfBirth",
                 table: "Users");
 
             migrationBuilder.DropColumn(

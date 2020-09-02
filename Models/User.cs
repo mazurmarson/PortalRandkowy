@@ -14,7 +14,7 @@ namespace PortalRandkowy.API.Models
 
         public string Gender { get; set; }
 
-        public DateTime DateOfBirt { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public string ZodiacSign { get; set; }
 
