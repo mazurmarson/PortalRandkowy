@@ -17,6 +17,7 @@ import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './_guards/auth.guard';
 
 // tslint:disable-next-line: typedef
 export function tokenGetter()
@@ -53,7 +54,8 @@ export function tokenGetter()
   providers: [
     AuthService,
     AlertifyService,
-    UserService
+    UserService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
