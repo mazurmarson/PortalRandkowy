@@ -34,7 +34,7 @@ export interface User {
     idoNotLike: string;
     makesMeLaugh: string;
     itFeelsBestIn: string;
-    
+
     photos: Photo[];
     photoUrl: string;
 
