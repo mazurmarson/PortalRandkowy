@@ -18,6 +18,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './_guards/auth.guard';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 // tslint:disable-next-line: typedef
 export function tokenGetter()
@@ -47,7 +50,9 @@ export function tokenGetter()
       }
    }),
 
-   RouterModule.forRoot(appRoutes)
+   RouterModule.forRoot(appRoutes),
+   BrowserAnimationsModule,
+   BsDropdownModule.forRoot()
 
 
   ],
