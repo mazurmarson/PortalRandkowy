@@ -13,6 +13,10 @@ import { UserService } from './_services/user.service';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { fromEventPattern } from 'rxjs';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LikesComponent } from './likes/likes.component';
+import { MessagesComponent } from './messages/messages.component';
+import { appRoutes } from './routes';
+import { RouterModule } from '@angular/router';
 
 // tslint:disable-next-line: typedef
 export function tokenGetter()
@@ -26,8 +30,9 @@ export function tokenGetter()
     NavComponent,
       HomeComponent,
       RegisterComponent,
-      UserListComponent
-
+      UserListComponent,
+      LikesComponent,
+      MessagesComponent
    ],
   imports: [
     BrowserModule,
@@ -39,7 +44,9 @@ export function tokenGetter()
          allowedDomains: ['localhost:5000'],
          disallowedRoutes: ['localhost:5000/api/auth']
       }
-   })
+   }),
+
+   RouterModule.forRoot(appRoutes)
 
 
   ],
