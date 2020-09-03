@@ -10,6 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { fromEventPattern } from 'rxjs';
+import { JwtModule } from '@auth0/angular-jwt';
+
+// tslint:disable-next-line: typedef
+export function tokenGetter()
+{
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -17,12 +26,22 @@ import { UserService } from './_services/user.service';
     NavComponent,
       HomeComponent,
       RegisterComponent,
+      UserListComponent
 
    ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+         tokenGetter,
+         allowedDomains: ['localhost:5000'],
+         disallowedRoutes: ['localhost:5000/api/auth']
+      }
+   })
+
+
   ],
   providers: [
     AuthService,
