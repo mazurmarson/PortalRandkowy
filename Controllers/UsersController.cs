@@ -26,20 +26,20 @@ namespace PortalRandkowy.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            try
-            {
+            
+            
                 throw new Exception("Generujemy recznie blad");
             
                  var users = await _repo.GetUsers();
 
                 var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
-            return Ok(usersToReturn);
-            }
-            catch(System.Exception)
-            {
+                 return Ok(usersToReturn);
+            
+            
+            
                     return StatusCode(500, "Recznie wygenerowany wyjatek");
-            }
+            
             
             
 
