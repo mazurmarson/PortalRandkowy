@@ -26,8 +26,6 @@ namespace PortalRandkowy.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            
-            
                
             
                  var users = await _repo.GetUsers();
@@ -35,15 +33,7 @@ namespace PortalRandkowy.API.Controllers
                 var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
                  return Ok(usersToReturn);
-            
-            
-            
-                    
-            
-            
-            
-
-           
+    
         }
 
         [HttpGet("{id}")]
