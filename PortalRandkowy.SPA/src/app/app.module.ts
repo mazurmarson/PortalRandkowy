@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { UserCardComponent } from './users/user-list/user-card/user-card.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 
 
 // tslint:disable-next-line: typedef
@@ -47,6 +49,7 @@ export function tokenGetter()
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
          tokenGetter,
