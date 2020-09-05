@@ -28,7 +28,7 @@ namespace PortalRandkowy.API.Controllers
         {
             
             
-                throw new Exception("Generujemy recznie blad");
+               
             
                  var users = await _repo.GetUsers();
 
@@ -38,7 +38,7 @@ namespace PortalRandkowy.API.Controllers
             
             
             
-                    return StatusCode(500, "Recznie wygenerowany wyjatek");
+                    
             
             
             

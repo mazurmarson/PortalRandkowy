@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from './_guards/auth.guard';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 
 // tslint:disable-next-line: typedef
@@ -60,7 +61,8 @@ export function tokenGetter()
     AuthService,
     AlertifyService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })
