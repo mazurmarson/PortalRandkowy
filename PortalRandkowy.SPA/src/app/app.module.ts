@@ -22,6 +22,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { UserCardComponent } from './users/user-list/user-card/user-card.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 
 // tslint:disable-next-line: typedef
@@ -39,7 +40,8 @@ export function tokenGetter()
       UserListComponent,
       LikesComponent,
       MessagesComponent,
-      UserCardComponent
+      UserCardComponent,
+      UserDetailComponent
    ],
   imports: [
     BrowserModule,
