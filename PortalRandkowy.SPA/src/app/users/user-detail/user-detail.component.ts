@@ -20,17 +20,20 @@ export class UserDetailComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
-    this.loadUser();
+    // this.loadUser();
+    this.route.data.subscribe(data => {
+      this.user = data.user;
+    });
   }
 
   // tslint:disable-next-line: typedef
-  loadUser()
-  {
-    this.userService.getUser(+this.route.snapshot.params.id).subscribe((user: User) => {
-      this.user = user;
-    }, error => {
-      this.alertifyService.error(error);
-    });
-  }
+  // loadUser()
+  // {
+  //   this.userService.getUser(+this.route.snapshot.params.id).subscribe((user: User) => {
+  //     this.user = user;
+  //   }, error => {
+  //     this.alertifyService.error(error);
+  //   });
+  // }
 
 }
