@@ -26,6 +26,7 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 
 
@@ -51,6 +52,7 @@ export function tokenGetter()
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    NgxGalleryModule,
     TabsModule.forRoot(),
     JwtModule.forRoot({
       config: {
