@@ -11,6 +11,8 @@ namespace PortalRandkowy.API.Models
 
         public bool IsMain { get; set; }
 
+        public string public_id { get; set;}
+
         public User User { get; set; }
 
         public int UserId { get; set; }
