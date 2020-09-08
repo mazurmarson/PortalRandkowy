@@ -5,14 +5,12 @@ using AutoMapper;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using PortalRandkowy.API.Data;
 using PortalRandkowy.API.Dtos;
 using PortalRandkowy.API.Helpers;
 using PortalRandkowy.API.Models;
-using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace PortalRandkowy.API.Controllers
 {
@@ -23,9 +21,8 @@ namespace PortalRandkowy.API.Controllers
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
-        
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
-        private Cloudinary _cloudinary;
+        private Cloudinary _claudinary;
 
         public PhotosController(IUserRepository repository, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
@@ -39,69 +36,60 @@ namespace PortalRandkowy.API.Controllers
                 _cloudinaryConfig.Value.ApiSecret
             );
 
-            _cloudinary = new Cloudinary(account);             
-            
+            _claudinary = new Cloudinary(account);
         }
 
-            [HttpPost]
-            public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoForCreationDto)
-            {
-                
-                if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                {
+        [HttpPost]
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm] PhotoForCreationDto photoForCreationDto)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-
-             }
 
             var userFromRepo = await _repository.GetUser(userId);
 
             var file = photoForCreationDto.File;
             var uploadResult = new ImageUploadResult();
 
-            if(file.Length > 0)
+            if (file.Length > 0)
             {
-                using ( var stream = file.OpenReadStream())
+                using (var stream = file.OpenReadStream())
                 {
                     var uploadParams = new ImageUploadParams()
                     {
-                        File = new FileDescription(file.FileName, stream),
+                        File = new FileDescription(file.Name, stream),
                         Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
                     };
 
-                    uploadResult = _cloudinary.Upload(uploadParams);
+                    uploadResult = _claudinary.Upload(uploadParams);
                 }
             }
 
-            photoForCreationDto.Url = uploadResult.Url.ToString();
+            photoForCreationDto.Url = uploadResult.Uri.ToString();
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            if(!userFromRepo.Photos.Any(p => p.IsMain))
-            {
+            if (!userFromRepo.Photos.Any(p => p.IsMain))
                 photo.IsMain = true;
-            }
 
             userFromRepo.Photos.Add(photo);
 
-            if(await _repository.SaveAll())
+            if (await _repository.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
             return BadRequest("Nie można dodać zdjęcia");
-            }
+        }
 
-            [HttpGet("{id}", Name = "GetPhoto")]
-            public async Task<IActionResult> GetPhoto(int id)
-            {
-                var photoFromRepo = await _repository.GetPhoto(id);
+        [HttpGet("/{id}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            var photoFromRepo = await _repository.GetPhoto(id);
 
-                var photoForReturn = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+            var photoForReturn = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
 
-                return Ok(photoForReturn);
-
-            }
-
+            return Ok(photoForReturn);
+        }
     }
 }

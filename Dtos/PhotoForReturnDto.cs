@@ -12,6 +12,6 @@ namespace PortalRandkowy.API.Dtos
 
         public bool IsMain { get; set; }
 
-        public string PublicId { get; set; }
+        public string public_Id { get; set; }
     }
 }
