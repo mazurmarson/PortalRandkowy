@@ -30,6 +30,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavesChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PhotosComponent } from './users/photos/photos.component';
 
 
 
@@ -50,7 +51,8 @@ export function tokenGetter()
       MessagesComponent,
       UserCardComponent,
       UserDetailComponent,
-      UserEditComponent
+      UserEditComponent,
+      PhotosComponent
    ],
   imports: [
     BrowserModule,
