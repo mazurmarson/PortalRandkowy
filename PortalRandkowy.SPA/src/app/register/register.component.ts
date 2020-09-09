@@ -1,7 +1,7 @@
 import { Component, OnInit,  Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 declare let alertify: any;
 
 @Component({
@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.registerForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl(),
-      confirmPassword: new FormControl()
+      username: new FormControl('Podaj nazwę użytkownika', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
+      confirmPassword: new FormControl('', Validators.required)
     });
   }
 
