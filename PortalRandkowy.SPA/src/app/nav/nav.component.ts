@@ -11,10 +11,12 @@ declare let alertify: any;
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  photoUrl: string;
   // tslint:disable-next-line: no-shadowed-variable
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
   // tslint:disable-next-line: typedef
   ngOnInit() {
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
   // tslint:disable-next-line: typedef
   login()
