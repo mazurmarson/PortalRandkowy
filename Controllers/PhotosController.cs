@@ -22,7 +22,7 @@ namespace PortalRandkowy.API.Controllers
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
-        private Cloudinary _claudinary;
+        private Cloudinary _cloudinary;
 
         public PhotosController(IUserRepository repository, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
@@ -36,7 +36,7 @@ namespace PortalRandkowy.API.Controllers
                 _cloudinaryConfig.Value.ApiSecret
             );
 
-            _claudinary = new Cloudinary(account);
+            _cloudinary = new Cloudinary(account);
         }
 
         [HttpPost]
@@ -60,7 +60,7 @@ namespace PortalRandkowy.API.Controllers
                         Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
                     };
 
-                    uploadResult = _claudinary.Upload(uploadParams);
+                    uploadResult = _cloudinary.Upload(uploadParams);
                 }
             }
 
@@ -117,5 +117,53 @@ namespace PortalRandkowy.API.Controllers
 
             return BadRequest("Nie można ustawić zdjęcia jako głównego");
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _repository.GetUser(userId);
+
+            if (!user.Photos.Any(p => p.Id == id))
+                return Unauthorized();
+
+            var photoFromRepo = await _repository.GetPhoto(id);
+
+            if (photoFromRepo.IsMain)
+                return BadRequest("Nie można usunąć zdjęcia głównego");
+
+            if (photoFromRepo.public_id != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.public_id);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _repository.Delete(photoFromRepo);
+                }
+
+            }
+
+            if (photoFromRepo.public_id == null)
+            {
+                _repository.Delete(photoFromRepo);
+            }
+
+
+
+
+            if (await _repository.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Nie udało się usunąć zdjęcia");
+
+        }
+
+
     }
 }
