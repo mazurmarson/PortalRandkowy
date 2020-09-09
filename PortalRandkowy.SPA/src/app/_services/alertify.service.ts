@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PreventUnsavesChanges } from '../_guards/prevent-unsaved-changes.guard';
 declare let alertify: any;
 
 @Injectable({
@@ -30,6 +31,20 @@ warning(message: string)
 message(message: string)
 {
   alertify.message(message);
+}
+
+confirm(message: string, okCallback: () => any)
+{
+  alertify.confirm(message, (e) => {
+    if(e)
+    {
+      okCallback();
+    }
+    else
+    {
+      
+    }
+  });
 }
 
 }
