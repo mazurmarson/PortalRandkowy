@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalRandkowy.API.Data;
 using PortalRandkowy.API.Dtos;
+using PortalRandkowy.API.Helpers;
 
 namespace PortalRandkowy.API.Controllers
 {
 
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

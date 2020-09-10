@@ -57,6 +57,8 @@ namespace PortalRandkowy.API
                                 ValidateAudience = false
                             };
                         });
+                        
+                        services.AddScoped<LogUserActivity>();
             
         }
 

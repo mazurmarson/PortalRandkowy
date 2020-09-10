@@ -43,7 +43,21 @@ namespace PortalRandkowy.API.Controllers
 
             var userToCreate = new User
             {
-                Username = userForRegisterDto.Username
+                Username = userForRegisterDto.Username,
+
+                 Gender = userForRegisterDto.Gender,
+
+                DateOfBirth = userForRegisterDto.DateOfBirth,
+
+                ZodiacSign = userForRegisterDto.ZodiacSign,
+                
+                Created = userForRegisterDto.Created,
+
+                 LastActive = userForRegisterDto.LastActive,
+
+                City = userForRegisterDto.City,
+
+                Country = userForRegisterDto.Country
             };
 
             
