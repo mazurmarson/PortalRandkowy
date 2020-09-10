@@ -43,9 +43,9 @@ login(model: any) // Model przyjmuje dane jakiekolwiek
 }
 
 // tslint:disable-next-line: typedef
-register(model: any)
+register(user: User)
 {
-  return this.http.post(this.baseUrl + 'register', model);
+  return this.http.post(this.baseUrl + 'register', user);
 }
 
 // tslint:disable-next-line: typedef
