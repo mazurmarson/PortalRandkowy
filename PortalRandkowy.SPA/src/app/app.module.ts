@@ -32,6 +32,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavesChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './users/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 // tslint:disable-next-line: typedef
@@ -62,6 +63,8 @@ export function tokenGetter()
     NgxGalleryModule,
     ReactiveFormsModule,
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
          tokenGetter,
