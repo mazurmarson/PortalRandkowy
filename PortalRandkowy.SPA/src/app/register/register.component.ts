@@ -1,7 +1,7 @@
 import { Component, OnInit,  Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 declare let alertify: any;
 
 @Component({
@@ -17,15 +17,20 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   // tslint:disable-next-line: no-shadowed-variable
-  constructor(private authService: AuthService, private alertify: AlertifyService ) { }
+  constructor(private authService: AuthService, private alertify: AlertifyService, private fb: FormBuilder ) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
-    this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
-      confirmPassword: new FormControl('', Validators.required)
-    },this.passwordMatchValidator);
+  this.createRegisterForm();
+  }
+
+  createRegisterForm()
+  {
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+      confirmPassword: ['', Validators.required]
+    }, {validators: this.passwordMatchValidator});
   }
 
   passwordMatchValidator(fg: FormGroup){
