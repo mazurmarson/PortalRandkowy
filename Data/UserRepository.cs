@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PortalRandkowy.API.Helpers;
 using PortalRandkowy.API.Models;
 
 namespace PortalRandkowy.API.Data
@@ -38,6 +39,13 @@ namespace PortalRandkowy.API.Data
         {
            return await _context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
             
+        }
+
+        public async Task<PagedList<User>> GetUsers(UserParams userParams)
+        {
+            var users = _context.Users.Include(p => p.Photos);
+
+            return await PagedList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
         }
     }
 }
