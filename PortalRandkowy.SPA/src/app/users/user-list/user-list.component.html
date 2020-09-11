@@ -4,7 +4,7 @@
       <a href="http://dev-hobby.pl">
         <img src="../../../assets/banerPoziom.png" alt="Miejsce na baner reklamowy" class="card-img-top">
       </a>
-     
+
     </div>
   </div>
 </div>
@@ -33,7 +33,16 @@
           <app-user-card [user]="user"></app-user-card>
         </div>
       </div>
+      <pagination [boundaryLinks]="true" 
+                  [totalItems]="pagination.totalItems"
+                  [itemsPerPage]="pagination.itemsPerPage"
+                  [(ngModel)]="pagination.currentPage"
+                  (pageChanged)="pageChanged($event)"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
     </div>
+
+
 
   </div>
 </div>

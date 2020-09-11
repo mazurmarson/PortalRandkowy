@@ -12,7 +12,7 @@ import { error } from 'protractor';
 export class UserListResolver implements Resolve<User[]>
 {
     pageNumber = 1;
-    pageSize = 36;
+    pageSize = 12;
 
     constructor(private userService: UserService, private router: Router, private alertify: AlertifyService) {}
 
@@ -20,7 +20,7 @@ export class UserListResolver implements Resolve<User[]>
         return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError( error => {
                 this.alertify.error('Problem z pobraniem danych');
-                this.router.navigate(['uzytkownicy']);
+                this.router.navigate(['']);
                 return of(null);
             })
         );

@@ -10,5 +10,4 @@ export interface Pagination {
 export class PaginationResult<T> {
     result: T;
     pagination: Pagination;
-    
 }
