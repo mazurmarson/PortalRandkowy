@@ -36,6 +36,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule }  from 'ngx-bootstrap/buttons';
+import { LikesResolver } from './_resolvers/likes.resolver';
 
 
 // tslint:disable-next-line: typedef
@@ -94,7 +95,8 @@ export function tokenGetter()
     UserDetailResolver,
     UserListResolver,
     UserEditResolver,
-    PreventUnsavesChanges
+    PreventUnsavesChanges, 
+    LikesResolver
   ],
   bootstrap: [AppComponent]
 })
