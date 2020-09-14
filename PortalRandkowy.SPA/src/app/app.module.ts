@@ -37,6 +37,7 @@ import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule }  from 'ngx-bootstrap/buttons';
 import { LikesResolver } from './_resolvers/likes.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 
 // tslint:disable-next-line: typedef
@@ -96,7 +97,8 @@ export function tokenGetter()
     UserListResolver,
     UserEditResolver,
     PreventUnsavesChanges, 
-    LikesResolver
+    LikesResolver, 
+    MessagesResolver
   ],
   bootstrap: [AppComponent]
 })
