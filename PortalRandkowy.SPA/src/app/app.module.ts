@@ -35,6 +35,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule }  from 'ngx-bootstrap/buttons';
 
 
 // tslint:disable-next-line: typedef
@@ -65,6 +66,7 @@ export function tokenGetter()
     FileUploadModule,
     NgxGalleryModule,
     ReactiveFormsModule,
+    ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
