@@ -79,5 +79,10 @@ namespace PortalRandkowy.API.Data
 
             return await PagedList<User>.CreateListAsync(users, userParams.PageNumber, userParams.PageSize);
         }
+
+        public async Task<Like> GetLike(int userId, int recpientId)
+        {
+            return await _context.Likes.FirstOrDefaultAsync(u => u.UserLikesId == userId && u.UserIsLikedId == recpientId);
+        }
     }
 }

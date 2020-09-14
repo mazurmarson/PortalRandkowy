@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using PortalRandkowy.API.Data;
 using PortalRandkowy.API.Dtos;
 using PortalRandkowy.API.Helpers;
+using PortalRandkowy.API.Models;
 
 namespace PortalRandkowy.API.Controllers
 {
@@ -27,7 +28,7 @@ namespace PortalRandkowy.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _repo.GetUser(currentUserId);
@@ -38,14 +39,14 @@ namespace PortalRandkowy.API.Controllers
             {
                 userParams.Gender = userFromRepo.Gender == "mężczyzna" ? "kobieta" : "mężczyzna";
             }
-            
-                 var users = await _repo.GetUsers(userParams);
 
-                var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+            var users = await _repo.GetUsers(userParams);
 
-                Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
-                 return Ok(usersToReturn);
-    
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+            return Ok(usersToReturn);
+
         }
 
         [HttpGet("{id}")]
@@ -60,7 +61,7 @@ namespace PortalRandkowy.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
-            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
 
@@ -69,13 +70,51 @@ namespace PortalRandkowy.API.Controllers
             var userFromRepo = await _repo.GetUser(id);
             _mapper.Map(userForUpdateDto, userFromRepo);
 
-            if(await _repo.SaveAll())
+            if (await _repo.SaveAll())
             {
                 return NoContent();
             }
-            
+
             throw new Exception("Aktualizacja użytkownika nie powiodła sie przy zapisywaniu do bazy");
         }
-        
+
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+                
+
+            var like = await _repo.GetLike(id, recipientId);
+
+            if (like != null)
+            {
+                return BadRequest("Już lubisz tego użtkownika");
+            }
+
+            if (await _repo.GetUser(recipientId) == null)
+            {
+                return NotFound();
+            }
+
+            like = new Like
+            {
+                UserLikesId = id,
+                UserIsLikedId = recipientId
+            };
+
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+            return BadRequest("Nie można polubić użytkownika");
+
+
+        }
+
     }
 }

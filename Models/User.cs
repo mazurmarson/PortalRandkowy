@@ -83,6 +83,6 @@ namespace PortalRandkowy.API.Models
         public ICollection<Photo> Photos { get; set; } 
 
         public ICollection<Like> UserLikes { get; set; }
-        public ICollection<Like> UserLiked { get; set; }
+        public ICollection<Like> UserIsLiked { get; set; }
     }
 }

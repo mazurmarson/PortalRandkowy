@@ -20,19 +20,17 @@ namespace PortalRandkowy.API.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Like>().HasKey(k => new { k.userLikesId, k.UserIsLikedId });
+            builder.Entity<Like>().HasKey(k => new { k.UserLikesId, k.UserIsLikedId });
 
-            builder.Entity<Like>()
-            .HasOne(u => u.UserIsLiked)
-            .WithMany(u => u.UserLikes)
-            .HasForeignKey(u => u.UserIsLikedId)
-            .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Like>().HasOne(u => u.UserIsLiked)
+                                  .WithMany(u => u.UserLikes)
+                                  .HasForeignKey(u => u.UserIsLikedId)
+                                  .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Like>()
-            .HasOne(u => u.UserIsLiked)
-            .WithMany(u => u.UserLikes)
-            .HasForeignKey(u => u.userLikesId)
-            .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Like>().HasOne(u => u.UserLikes)
+                                  .WithMany(u => u.UserIsLiked)
+                                  .HasForeignKey(u => u.UserLikesId)
+                                  .OnDelete(DeleteBehavior.Restrict);
 
 
         }

@@ -18,18 +18,15 @@ namespace PortalRandkowy.API.Migrations
 
             modelBuilder.Entity("PortalRandkowy.API.Models.Like", b =>
                 {
-                    b.Property<int>("userLikesId")
+                    b.Property<int>("UserLikesId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserIsLikedId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UserLikesId")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("UserLikesId", "UserIsLikedId");
 
-                    b.HasKey("userLikesId", "UserIsLikedId");
-
-                    b.HasIndex("UserLikesId");
+                    b.HasIndex("UserIsLikedId");
 
                     b.ToTable("Likes");
                 });
@@ -188,13 +185,15 @@ namespace PortalRandkowy.API.Migrations
 
             modelBuilder.Entity("PortalRandkowy.API.Models.Like", b =>
                 {
-                    b.HasOne("PortalRandkowy.API.Models.User", "UserLikes")
-                        .WithMany("UserLiked")
-                        .HasForeignKey("UserLikesId");
-
                     b.HasOne("PortalRandkowy.API.Models.User", "UserIsLiked")
                         .WithMany("UserLikes")
-                        .HasForeignKey("userLikesId")
+                        .HasForeignKey("UserIsLikedId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PortalRandkowy.API.Models.User", "UserLikes")
+                        .WithMany("UserIsLiked")
+                        .HasForeignKey("UserLikesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
