@@ -148,9 +148,16 @@ namespace PortalRandkowy.API.Data
 
         }
 
-        public Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
         {
-            throw new NotImplementedException();
+                        var messages = await _context.Messages.Include(u => u.Sender).ThenInclude(p => p.Photos)
+            .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+            .Where(m => m.RecipientId == userId && m.SenderId == recipientId && m.RecipientDeletd == false
+        ||  m.RecipientId == recipientId && m.SenderId == userId && m.SenderDeleted == false)
+        .OrderByDescending( m => m.DateSend).ToListAsync();
+
+        return messages;
+
         }
     }
 }
