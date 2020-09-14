@@ -144,7 +144,7 @@ namespace PortalRandkowy.API.Data
 
             messages = messages.OrderByDescending(d => d.DateSend);
 
-            return await PagedList<Message>.CreateListAsync(messages, messagesParams.PageNumber, messageParams.PageSize);
+            return await PagedList<Message>.CreateListAsync(messages, messageParams.PageNumber, messageParams.PageSize);
 
         }
 
