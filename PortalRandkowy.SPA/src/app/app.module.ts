@@ -38,6 +38,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule }  from 'ngx-bootstrap/buttons';
 import { LikesResolver } from './_resolvers/likes.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { UserMessagesComponent } from './users/user-messages/user-messages.component';
 
 
 // tslint:disable-next-line: typedef
@@ -59,7 +60,8 @@ export function tokenGetter()
       UserDetailComponent,
       UserEditComponent,
       PhotosComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      UserMessagesComponent
    ],
   imports: [
     BrowserModule,

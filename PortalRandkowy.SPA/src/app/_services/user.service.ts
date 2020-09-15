@@ -116,4 +116,9 @@ getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginationR
 
   }
 
+  getMessageThread(id: number, recipientId: number)
+  {
+    return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
+  }
+
 }
