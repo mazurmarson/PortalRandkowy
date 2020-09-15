@@ -6,12 +6,14 @@ import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
+
 
   user: User;
   photoUrl: string;
@@ -48,6 +50,8 @@ export class UserEditComponent implements OnInit {
     updateMainPhoto(photoUrl){
       this.user.photoUrl = photoUrl;
     }
+
+
 }
 
 

@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {NgxGalleryOptions} from '@kolkov/ngx-gallery';
 import {NgxGalleryImage} from '@kolkov/ngx-gallery';
 import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-user-detail',
@@ -17,6 +19,7 @@ import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
 })
 export class UserDetailComponent implements OnInit {
 
+  @ViewChild('userTabs', { static:true }) userTabs: TabsetComponent
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -31,6 +34,11 @@ export class UserDetailComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+
+    this.route.queryParams.subscribe(params => {
+      const selectTab = params.tab;
+      this.userTabs.tabs[selectTab > 0 ? selectTab : 0].active   = true;
+    })
 
     this.galleryOptions = [
       {
@@ -75,5 +83,11 @@ export class UserDetailComponent implements OnInit {
   //     this.alertifyService.error(error);
   //   });
   // }
+
+  selectTab(tabId: number)
+  {
+    this.userTabs.tabs[tabId].active = true;
+  }
+
 
 }
