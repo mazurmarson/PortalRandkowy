@@ -29,12 +29,11 @@
   </div>
 
   <div class="form-group">
-    <input class="form-control" placeholder="Znak zodiaku" formControlName="zodiacSign"
-           [ngClass]="{'is-invalid': registerForm.get('zodiacSign').errors && registerForm.get('zodiacSign').touched}" >
-    <div class="invalid-feedback" 
-          *ngIf="registerForm.get('zodiacSign').touched && registerForm.get('zodiacSign').hasError('required')">  
-        Znak zodiaku jest wymagany
-      </div>
+    <select class="form-control" formControlName="zodiacSign" [(ngModel)]="userParams.zodiacSign">
+      <option *ngFor="let zodiacSign of zodiacSignList" [value]="zodiacSign.value">
+        {{zodiacSign.display}}
+      </option>
+    </select>
   </div>
 
   <div class="form-group">

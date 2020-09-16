@@ -10,6 +10,7 @@ export interface Message {
     isRead: boolean;
     dateRead: Date;
     dateSend: Date;
+    messageContainer: string;
 
 
 }

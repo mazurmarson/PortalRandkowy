@@ -19,6 +19,20 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
+  zodiacSignList = [
+  {value: 'Baran', display: 'Baran'},
+  {value: 'Byk', display: 'Byk'},
+  {value: 'Bliźnięta', display: 'Bliźnięta'},
+  {value: 'Rak', display: 'Rak'},
+  {value: 'Lew', display: 'Lew'},
+  {value: 'Panna', display: 'Panna'},
+  {value: 'Waga', display: 'Waga'},
+  {value: 'Scorpion', display: 'Skorpion'},
+  {value: 'Strzelec', display: 'Strzelec'},
+  {value: 'Koziorożec', display: 'Koziorożec'},
+  {value: 'Wodnik', display: 'Wodnik'},
+  {value: 'Ryby', display: 'Ryby'}];
+userParams: any = {};
 
   // tslint:disable-next-line: no-shadowed-variable
   constructor(private authService: AuthService, private alertify: AlertifyService, private fb: FormBuilder, private router: Router) { }

@@ -19,5 +19,9 @@ namespace PortalRandkowy.API.Dtos
 
         public DateTime DateSend { get; set; }
 
+        public string MessageContainer { get; set; }
+
+        
+
     }
 }

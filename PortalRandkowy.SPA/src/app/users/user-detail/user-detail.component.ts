@@ -11,6 +11,7 @@ import {NgxGalleryImage} from '@kolkov/ngx-gallery';
 import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -24,7 +25,7 @@ export class UserDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor(private userService: UserService, private alertifyService: AlertifyService, private route: ActivatedRoute)
+  constructor(private authService: AuthService, private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute)
     {
 
     }
@@ -88,6 +89,15 @@ export class UserDetailComponent implements OnInit {
   {
     this.userTabs.tabs[tabId].active = true;
   }
+
+  sendLike(id: number) {
+    this.userService.sendLike(this.authService.decodedToken.nameid, id)
+    .subscribe( data => {
+      this.alertify.success('Polubiłeś: ' + this.user.username);
+    }, error => {
+      this.alertify.error(error);
+    });
+}
 
 
 }
